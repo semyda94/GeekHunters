@@ -1,0 +1,80 @@
+﻿@model List<GeekHunters.Models.Candidate>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<environment include="Development">
+    <link rel="stylesheet" href="~/css/candidates-table.css" />
+</environment>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Table Style</title>
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+</head>
+
+<body>
+    <div class="table-title">
+        <h2>Candidates</h2>
+    </div>
+        
+    <form asp-action="PresentCandidateTable" method="get">
+            <div class="search">
+                <p>
+                    <input type="text" class="searchTerm" placeholder="Find it faster" value="@ViewData["currentFilter"]" name="searchString" />
+                    <input type="submit" value="Search" class="searchButton"/> 
+                    <a asp-action="PresentCandidateTable">Back to Full List</a>
+                </p>
+            </div>
+    </form>
+    
+    <table class="table-fill" width="100%">
+        <thead>
+            <tr>
+                <th class="text-left" width="20%">Candidate Name</th>
+                <th class="text-left" width="60%">Skills</th>
+                <th class="text-left" width="20%"></th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+            @foreach (var candidate in Model)
+            {
+                <tr>
+                    <td class="text-left">@candidate.FirstName @candidate.LastName</td>
+                    <td class="text-left">
+                        @if (candidate.CandidateSkills.Count != 0)
+                        {
+                            <ul class="two">
+                                @foreach (var skill in candidate.CandidateSkills.Select(s => s.Skill))
+                                {
+                                    <li>@skill.Name</li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>No Skills</p>
+                        }
+                    </td>
+                    <td class="text-left">
+                        <p>
+                            @Html.ActionLink("Edit", "CandidatePresentation", "Candidates", new { id = candidate.Id }, new { @class = "btn btn-green" })
+                        </p>
+                        <p>
+                            @Html.ActionLink("Delete", "Delete", "Candidates", new { id = candidate.Id }, new { @class = "btn btn-red" })
+                        </p>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        @Html.ActionLink("Add Candidate", "CandidatePresentation", "Candidates", new { id = -1 }, new { @class = "btn btn-green" })
+    </p>
+
+
+</body>
+

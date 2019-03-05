@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<environment include="Development">
+    <link rel="stylesheet" href="~/css/candidates-table.css" />
+</environment>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Table Style</title>
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+</head>
+
+<body>
+    @*
+        <div class="table-title">
+            <h2>Candidates</h2>
+        </div>
+        <table class="table-fill" width="100%">
+            <thead>
+                <tr>
+                    <th class="text-left" width="20%">Candidate Name</th>
+                    <th class="text-left" width="60%">Skills</th>
+                    <th class="text-left" width="30%"></th>
+                </tr>
+            </thead>
+            <tbody class="table-hover">
+                @foreach (var candidate in Model)
+                {
+                    <tr>
+                        <td class="text-left">@candidate.FirstName @candidate.LastName</td>
+                        <td class="text-left">
+                            <ul class="two">
+                                <li>List Item A</li>
+                                <li>List Item B</li>
+                                <li>List Item C</li>
+                            </ul>
+                        </td>
+                        <td class="text-left">
+                            <p>
+                                @Html.ActionLink("Edit", "About", "Home", null, new { @class = "btn btn-green" })
+                            </p>
+                            <p>
+                                @Html.ActionLink("Edit", "About", "Home", null, new { @class = "btn btn-red" })
+                            </p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>*@
+    <p>
+        <a href="#" class="btn btn-green">Add New Candidate</a>
+    </p>
+
+
+</body>
